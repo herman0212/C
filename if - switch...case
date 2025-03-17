@@ -1,0 +1,202 @@
+BT5:
+#include <stdio.h>
+#include <math.h>
+int main()
+{
+    double a, b, c;
+    scanf("%lf %lf %lf", &a, &b, &c);
+ 
+    if (a == 0)
+    {
+        if (b == 0)
+        {
+            if (c == 0)
+            {
+                printf("Moi x la nghiem\n");
+            }
+            else
+            {
+                printf("Phuong trinh vo nghiem\n");
+            }
+        }
+        else
+        {
+            printf("Phuong trinh co 1 nghiem don\nx = %.5lf\n", -c / b);
+        }
+    }
+    else
+    {
+        double delta, x1, x2;
+        delta = b * b - 4 * a * c;
+ 
+        if (delta > 0)
+        {
+            x1 = (-b - sqrt(delta)) / (2 * a);
+            x2 = (-b + sqrt(delta)) / (2 * a);
+            printf("Phuong trinh co 2 nghiem phan biet\nx1 = %.5lf\nx2 = %.5lf\n", x1, x2);
+        }
+        else if (delta == 0)
+        {
+            x1 = x2 = -b / (2 * a);
+            printf("Phuong trinh co nghiem kep\nx1 = x2 = %.5lf\n", x1);
+        }
+        else
+        {
+            printf("Phuong trinh vo nghiem\n");
+        }
+    }
+    return 0;
+}
+
+BT6BT6:
+#include <stdio.h>
+#include <math.h>
+int main()
+{
+    double a, b, e, c, d, f;
+    scanf("%lf %lf %lf", &a, &b, &e);
+    scanf("%lf %lf %lf", &c, &d, &f);
+    double D = a * d - b * c;
+    if (D != 0)
+    {
+        double x = (e * d - b * f) / D;
+        double y = (a * f - e * c) / D;
+        printf("He phuong trinh co nghiem duy nhat\n");
+        printf("x = %.f\n", x);
+        printf("y = %.f\n", y);
+    }
+    else
+    {
+        if (e * d - b * f == 0 && a * f - e * c == 0)
+        {
+            printf("He phuong trinh co vo so nghiem\n");
+        }
+        else
+        {
+            printf("He phuong trinh vo nghiem\n");
+        }
+    }
+    return 0;
+}
+ 
+
+BT7:
+#include <stdio.h>
+int main()
+{
+    double n;
+    scanf("%lf",&n);
+    if(n>0 && n<=10)
+    {
+        if(n<5)
+        {
+            printf("%.2lf: Yeu",n);
+        }
+        else if(n>=5 && n<7)
+        {
+            printf("%.2lf TB",n);
+        }
+        else if(n>=7 && n<8)
+        {
+            printf("%.2lf: Kha",n);
+        }
+        else if(n>=8 && n<9)
+        {
+            printf("%.2lf: Gioi",n);
+        }
+        else
+        {
+            printf("%.2lf: Xuat sac",n);
+        }
+    }
+    else
+    {
+        printf("Khong hop le");
+    }
+    return 0;
+}
+
+BT8:
+#include <stdio.h>
+#include <math.h>
+int main()
+{
+    double a,b,c;
+    scanf("%lf %lf %lf",&a,&b,&c);
+    if (a <= 0 || b <= 0 || c <= 0)
+    {
+        printf("Khong hop le\n");
+    }
+    else
+    {
+        if (a + b > c && a + c > b && b + c > a)
+        {
+            if (a==b && a==c)
+            {
+                printf("(%.2lf, %.2lf, %.2lf) la tam giac deu\n",a,b,c);
+            }
+            else if (a==b || a==c || b==c)
+            {
+                printf("(%.2lf, %.2lf, %.2lf) la tam giac can\n",a,b,c);
+            }
+            else if ((a * a == b * b + c * c) || (b * b == a * a + c * c) || (c * c == a * a + b * b))
+            {
+                printf("(%.2lf, %.2f, %.2lf) la tam giac vuong\n",a,b,c);
+            }
+            else if(((a * a == b * b + c * c) || (b * b == a * a + c * c) || (c * c == a * a + b * b)) && (a==b || a==c || b==c))
+            {
+                printf("(%.2lf, %.2lf, %.2lf) la tam giac vuong can\n",a,b,c);
+            }
+            else
+            {
+                printf("(%.2lf, %.2lf, %.2lf) la tam giac thuong\n",a,b,c);
+            }
+            double C=0;
+            C = a+b+c;
+            printf("Chu vi tam giac = %.2lf\n",C);
+            double S=0, P=0;
+            P = (a + b + c) / 2;
+            S= sqrt(P * (P - a) * (P - b) * (P - c));
+            printf("Dien tich tam giac = %.2lf\n",S);
+        }
+        else
+        {
+            printf("Khong hop le\n");
+        }
+    }
+    return 0;
+}
+
+BT9:
+#include <stdio.h>
+int main()
+{
+    int a,b;
+    scanf("%d %d", &a, &b);
+    if(a<1 || a>12 || b<1)
+    {
+        return 0;
+    }
+    int day_of_month;
+    if(a==2)
+    {
+        if(b%400==0 || b%4==0 && b%100!=0)
+        {
+            day_of_month = 29;
+        }
+        else
+        {
+            day_of_month = 28;
+        }
+    }
+    else if(a==4 || a==6 || a==9 || a==11)
+    {
+        day_of_month = 30;
+    }
+    else
+    {
+        day_of_month = 31;
+    }
+    printf("Thang %d nam %d co %d ngay",a,b,day_of_month);
+    return 0;
+}
