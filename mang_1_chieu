@@ -1,0 +1,319 @@
+BT1:
+#include <stdio.h>
+#include <stdlib.h>
+int main()
+{
+    int a[10];
+    for(int i=0; i<10; i++)
+    {
+        scanf("%d", &a[i]);
+        printf("%d", a[i]);
+    }
+    return 0;
+}
+
+BT2:
+#include <stdio.h>
+int main()
+{
+    int a[10];
+    for (int i = 0; i < 10; i++)
+    {
+        scanf("%d", &a[i]);
+    }
+    for (int i = 9; i >= 0; i--)
+    {
+        printf("%d ", a[i]);
+    }
+    return 0;
+}
+
+BT3:
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+void nhapmang(int a[], int len)
+{
+    for (int i = 0; i < len; i++)
+    {
+        scanf("%d", &a[i]);
+    }
+}
+int tong_mang(int a[],int len)
+{
+    int sum=0;
+    for(int i=0; i<len; i++)
+    {
+        sum=sum+a[i];
+    }
+    printf("Tong cua ca mang la: %d\n", sum);
+    return sum;
+}
+int tong_am(int a[], int len)
+{
+    int sum = 0, dem = 0;
+    for (int i = 0; i < len; i++)
+    {
+        if (a[i] < 0)
+        {
+            sum += a[i];
+            dem++;
+        }
+    }
+    printf("Tong cac so nguyen am: %d\n", sum);
+    return sum;
+}
+int tong_duong(int a[], int len)
+{
+    int sum = 0, dem = 0;
+    for (int i = 0; i < len; i++)
+    {
+        if (a[i] > 0)
+        {
+            sum += a[i];
+            dem++;
+        }
+    }
+    printf("Tong cac so nguyen duong: %d\n", sum);
+    return sum;
+}
+void trung_binh_cong(int a[], int len)
+{
+    int sum = 0;
+    for (int i = 0; i < len; i++)
+    {
+        sum += a[i];
+    }
+    double avg = (double)sum / len;
+    printf("Trung binh cong cua ca mang: %.2f\n", avg);
+}
+void trung_binh_am(int a[], int len)
+{
+    int sum = 0, dem = 0;
+    for (int i = 0; i < len; i++)
+    {
+        if (a[i] < 0)
+        {
+            sum += a[i];
+            dem++;
+        }
+    }
+    if (dem > 0)
+    {
+        printf("Trung binh cong cac so nguyen am: %.2f\n", (double)sum / dem);
+    }
+    else
+    {
+        printf("Khong co so nguyen am nao trong mang.\n");
+    }
+}
+void trung_binh_duong(int a[], int len)
+{
+    int sum = 0, dem = 0;
+    for (int i = 0; i < len; i++)
+    {
+        if (a[i] > 0)
+        {
+            sum += a[i];
+            dem++;
+        }
+    }
+    if (dem > 0)
+    {
+        printf("Trung binh cong cac so nguyen duong: %.2f\n", (double)sum / dem);
+    }
+    else
+    {
+        printf("Khong co so nguyen duong nao trong mang.\n");
+    }
+}
+int main()
+{
+    //freopen("D:\\input.txt", "r", stdin);
+    int n;
+    scanf("%d", &n);
+    int a[n];
+    nhapmang(a, n);
+    tong_mang(a, n);
+    tong_am(a, n);
+    tong_duong(a, n);
+    trung_binh_cong(a, n);
+    trung_binh_am(a, n);
+    trung_binh_duong(a, n);
+    return 0;
+}
+
+BT4:
+#include<stdio.h>
+#include<stdlib.h>
+void nhapmang(float a[], int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        scanf("%f", &a[i]);
+    }
+}
+void TimMin(float a[], int n)
+{
+    float min = a[0];
+    for(int i = 1; i < n; i++)
+    {
+        if(a[i] < min)
+        {
+            min = a[i];
+        }
+    }
+    printf("Min = %.3f\n", min);
+}
+void TimMax(float a[], int n)
+{
+    float max = a[0];
+    for(int i = 1; i < n; i++)
+    {
+        if(a[i] > max)
+        {
+            max = a[i];
+        }
+    }
+    printf("Max = %.3f\n", max);
+}
+int main()
+{
+    //freopen("D:\\input.txt", "r", stdin);
+    int n;
+    scanf("%d", &n);
+    float a[n];
+    nhapmang(a, n);
+    TimMin(a, n);
+    TimMax(a, n);
+    return 0;
+} 
+
+BT5:
+#include<stdio.h>
+#include<stdlib.h>
+#define LEN 10
+void nhapmang(unsigned a[], int len)
+{
+    for (int i=0; i<len; i++)
+    {
+        scanf("%u", &a[i]);
+    }
+}
+int so_lan_xuat_hien(unsigned a[], int len, int x)
+{
+    int dem=0;
+    for(int i=0; i<len; i++)
+    {
+        if(a[i] == x)
+        {
+            dem++;
+        }
+    }
+    return dem;
+}
+int main()
+{
+    //freopen("D:\\input.txt", "r", stdin);
+    int n;
+    unsigned x;
+    unsigned a[LEN];
+    scanf("%d", &n);
+    scanf("%u", &x);
+    nhapmang(a, n);
+    int A = so_lan_xuat_hien(a, n, x);
+    printf("Phan tu %d xuat hien %d lan\n", x, A);
+    return 0;
+}
+
+BT6:
+#include <stdio.h>
+#include <stdlib.h>
+#define LEN 10
+void nhapmang(int a[], int len)
+{
+    for (int i = 0; i < len; i++)
+    {
+        scanf("%d", &a[i]);
+    }
+}
+void thay_the_mang(int a[], int len)
+{
+    for (int i = 0; i < len; i++)
+    {
+        if (a[i] < 0)
+        {
+            a[i] = 0;
+        }
+    }
+}
+void in_mang(int a[], int len)
+{
+    for (int i = 0; i < len; i++)
+    {
+        printf("%d ", a[i]);
+    }
+    printf("\n");
+}
+int main()
+{
+    //freopen("D:\\input.txt", "r", stdin);
+    int n;
+    int a[LEN];
+    scanf("%d", &n);
+    nhapmang(a, n);
+    thay_the_mang(a, n);
+    in_mang(a, n);
+    return 0;
+}
+
+BT7:
+#include <stdio.h>
+#include <stdlib.h>
+#define LEN 10
+void nhapmang(int a[], int len)
+{
+    for (int i = 0; i < len; i++)
+    {
+        scanf("%d", &a[i]);
+    }
+}
+void doi_cho(int *a, int *b)
+{
+        int temp;
+        temp = *a;
+        *a = *b;
+        *b = temp;
+}
+void sap_xep_tang_dan(int a[], int len)
+{
+    for (int i = 0; i < len - 1; i++)
+    {
+        for (int j = i + 1; j < len; j++)
+        {
+            if (a[j] < a[i])
+            {
+                doi_cho(&a[i], &a[j]);
+            }
+        }
+    }
+}
+void in_mang(int a[], int len)
+{
+    for (int i = 0; i < len; i++)
+    {
+        printf("%d ", a[i]);
+    }
+    printf("\n");
+}
+int main()
+{
+    //freopen("D:\\input.txt", "r", stdin);
+    int n;
+    int a[LEN];
+    scanf("%d", &n);
+    nhapmang(a, n);
+    sap_xep_tang_dan(a, n);
+    in_mang(a, n);
+    return 0;
+}
