@@ -1,0 +1,81 @@
+BT1:
+#include <stdio.h>
+#include <stdlib.h>
+int main()
+{
+    double x;
+    scanf("%.2lf", &x);
+    printf("%.2lf\n", x*x);
+    printf("%.2lf\n", x*x*x);
+    printf("%.2lf\n", x*x*x*x);
+    return 0;
+}
+
+BT2:
+#include <stdio.h>
+int main()
+{
+    int d,m,y;
+    scanf("%d %d %d",&d,&m,&y);
+    if (m < 1 || m > 12 || y < 1)
+    {
+        printf("%d/%d/%d: khong hop le\n", d, m, y);
+        return 0;
+    }
+    int so_ngay_mot_thang;
+    if (m == 2)
+    {
+        if ((y % 4 == 0 && y % 100 != 0) || (y % 400 == 0))
+        {
+            so_ngay_mot_thang = 29;
+        }
+        else
+        {
+            so_ngay_mot_thang = 28;
+        }
+    }
+    else if (m == 4 || m == 6 || m == 9 || m == 11)
+    {
+        so_ngay_mot_thang = 30;
+    }
+    else
+    {
+        so_ngay_mot_thang = 31;
+    }
+    if (d < 1 || d > so_ngay_mot_thang)
+    {
+        printf("%d/%d/%d: khong hop le\n", d, m, y);
+    }
+    else
+    {
+        printf("Hom nay la ngay %d/%d/%d\n", d, m, y);
+    }
+    return 0;
+}
+
+BT3:
+#include <stdio.h>
+int main()
+{
+    int a,b;
+    scanf("%d %d",&a,&b);
+    printf("%d + %d = %d\n",a,b,a+b);
+    printf("%d - %d = %d\n",a,b,a-b);
+    printf("%d * %d = %d\n",a,b,a*b);
+    printf("%d / %d = %d\n",a,b,a/b);
+    return 0;
+}
+
+BT4:
+#include <stdio.h>
+#include <math.h>
+int main()
+{
+    double R;
+    const double PI = 3.141592653589793;
+    scanf("%lf", &R);
+    double S = 4*PI*R*R;
+    double V = (4/3)*PI*R*R*R;
+    printf("Dien tich = %.2lf\n2", S);
+    printf("The tich  = %.2lf", V);
+}
