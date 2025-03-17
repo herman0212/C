@@ -317,3 +317,68 @@ int main()
     in_mang(a, n);
     return 0;
 }
+BT8:
+#include <stdio.h>
+#include <stdlib.h>
+#define LEN 20
+void nhapmang(int a[], int len)
+{
+    for (int i = 0; i < len; i++)
+    {
+        scanf("%d", &a[i]);
+    }
+}
+void doi_cho(int *a, int *b)
+{
+        int temp;
+        temp = *a;
+        *a = *b;
+        *b = temp;
+}
+void ghep_mang(int a[], int len_a, int b[], int len_b, int c[])
+{
+    int k = 0;
+    for (int i = 0; i < len_a; i++)
+    {
+        c[k++] = a[i];
+    }
+    for (int i = 0; i < len_b; i++)
+    {
+        c[k++] = b[i];
+    }
+}
+void sap_xep_tang_dan(int a[], int len)
+{
+    for (int i = 0; i < len - 1; i++)
+    {
+        for (int j = i + 1; j < len; j++)
+        {
+            if (a[j] < a[i])
+            {
+                doi_cho(&a[i], &a[j]);
+            }
+        }
+    }
+}
+void in_mang(int a[], int len)
+{
+    for (int i = 0; i < len; i++)
+    {
+        printf("%d ", a[i]);
+    }
+    printf("\n");
+}
+int main()
+{
+    //freopen("D:\\input.txt", "r", stdin);
+    int n,m;
+    int a[LEN], b[LEN], c[2*LEN];
+    scanf("%d", &n);
+    nhapmang(a, n);
+    scanf("%d", &m);
+    nhapmang(b, m);
+    ghep_mang(a, n, b, m, c);
+    sap_xep_tang_dan(c, n+m);
+    in_mang(c, n+m);
+    return 0;
+}
