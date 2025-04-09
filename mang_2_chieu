@@ -1,1 +1,243 @@
+BT1:
+#include <stdio.h>
+#include <stdlib.h>
+#define ROWS 3
+#define COLS 3
 
+void nhapmang(int a[][COLS], int m, int n)
+{
+    int i, j;
+    for (i = 0; i < m; i++)
+    {
+        for (j = 0; j < n; j++)
+        {
+            scanf("%d", &a[i][j]);
+        }
+    }
+}
+
+void inmang(int a[][COLS], int m, int n)
+{
+    int i, j;
+    for (i = 0; i < m; i++)
+    {
+        for (j = 0; j < n; j++)
+        {
+            printf("%d ", a[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+}
+
+int main()
+{
+    int a[ROWS][COLS] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    int b[ROWS][COLS];
+    int m = ROWS, n = COLS;
+
+    printf("Ma tran khai bao san:\n");
+    inmang(a, m, n);
+
+    printf("Nhap so vao ma tran:\n");
+    nhapmang(b, m, n);
+
+    printf("\nMa tran nhap tu ban phim:\n");
+    inmang(b, m, n);
+
+    return 0;
+}
+
+BT2:
+#include <stdio.h>
+#include <stdlib.h>
+#define ROWS 3
+#define COLS 3
+
+void nhapmang(int a[][COLS], int m, int n)
+{
+    int i, j;
+    for (i = 0; i < m; i++)
+    {
+        for (j = 0; j < n; j++)
+        {
+            scanf("%d", &a[i][j]);
+        }
+    }
+}
+
+void in_tong_ma_tran(int a[][COLS], int b[][COLS], int c[][COLS], int n, int m)
+{
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            c[i][j] = a[i][j] + b[i][j];
+        }
+    }
+}
+
+void inmang(int a[][COLS], int m, int n)
+{
+    int i, j;
+    for (i = 0; i < m; i++)
+    {
+        for (j = 0; j < n; j++)
+        {
+            printf("%3d ", a[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+}
+
+int main()
+{
+    int a[ROWS][COLS], b[ROWS][COLS], c[ROWS][COLS];
+    int m = ROWS, n = COLS;
+    printf("Nhap ma tran A: ");
+    nhapmang(a,m,n);
+
+    printf("Nhap ma tran B: ");
+    nhapmang(b,m,n);
+
+    in_tong_ma_tran(a,b,c,m,n);\
+    printf("\nTong hai ma tran:\n");
+    inmang(c,m,n);
+    return 0;
+}
+
+BT3:
+#include <stdio.h>
+#include <stdlib.h>
+#define ROWS 3
+#define COLS 3
+
+void nhapmang(int a[][COLS], int m, int n)
+{
+    int i, j;
+    for (i = 0; i < m; i++)
+    {
+        for (j = 0; j < n; j++)
+        {
+            scanf("%d", &a[i][j]);
+        }
+    }
+}
+
+void in_tich_ma_tran(int a[][COLS], int b[][COLS], int c[][COLS], int n, int m, int p)
+{
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < p; j++)
+        {
+            c[i][j] = 0;
+            for (int k = 0; k < m; k++)
+            {
+                c[i][j] += a[i][k] * b[k][j];
+            }
+        }
+    }
+}
+
+void inmang(int a[][COLS], int m, int n)
+{
+    int i, j;
+    for (i = 0; i < m; i++)
+    {
+        for (j = 0; j < n; j++)
+        {
+            printf("%3d ", a[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+}
+
+int main()
+{
+    int a[ROWS][COLS], b[ROWS][COLS], c[ROWS][COLS];
+    int m = ROWS, n = COLS, p = COLS;
+    printf("Nhap ma tran A: ");
+    nhapmang(a,m,n);
+
+    printf("Nhap ma tran B: ");
+    nhapmang(b,m,n);
+
+    in_tich_ma_tran(a,b,c,m,n,p);
+    printf("\nTich hai ma tran:\n");
+    inmang(c,m,n);
+    return 0;
+}
+
+BT4:
+#include <stdio.h>
+#include <stdlib.h>
+#define ROWS 3
+#define COLS 3
+
+void ma_tran_xoay(int a[][COLS], int n)
+{
+    int k = 1;
+    int hangdau = 0, hangcuoi = n - 1, cotdau = 0, cotcuoi = n - 1;
+
+    while (k <= n * n)
+    {
+
+        for (int i = cotdau; i <= cotcuoi; i++)
+        {
+            a[hangdau][i] = k++;
+        }
+        hangdau++;
+
+
+        for (int i = hangdau; i <= hangcuoi; i++)
+        {
+            a[i][cotcuoi] = k++;
+        }
+        cotcuoi--;
+
+
+        if (hangdau <= hangcuoi)
+        {
+            for (int i = cotcuoi; i >= cotdau; i--)
+            {
+                a[hangcuoi][i] = k++;
+            }
+            hangcuoi--;
+        }
+
+
+        if (cotdau <= cotcuoi)
+        {
+            for (int i = hangcuoi; i >= hangdau; i--)
+            {
+                a[i][cotdau] = k++;
+            }
+            cotdau++;
+        }
+    }
+}
+
+void inmang(int a[][COLS], int m, int n)
+{
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            printf("%3d ", a[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+}
+
+int main()
+{
+    int a[ROWS][COLS];
+    int n = ROWS;
+    ma_tran_xoay(a, n);
+    printf("Ma tran xoay:\n");
+    inmang(a, n, n);
+    return 0;
+}
