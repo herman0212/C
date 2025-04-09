@@ -1,0 +1,111 @@
+BT1:
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node
+{
+    char Ten_hang[20];
+    int Don_gia;
+    int So_luong;
+    int Thanh_tien;
+    struct Node* next;
+} Node;
+
+typedef struct
+{
+    Node* first;
+    Node* last;
+} Linkedlist;
+
+Node* create_new_node()
+{
+    Node* node = (Node*)malloc(sizeof(Node));
+    printf("Nhap ten hang: ");
+    getchar();
+    fgets(node->Ten_hang, sizeof(node->Ten_hang), stdin);
+    printf("Nhap don gia: ");
+    scanf("%d", &node->Don_gia);
+    printf("Nhap so luong: ");
+    scanf("%d", &node->So_luong);
+    node->Thanh_tien = node->So_luong * node->Don_gia;
+    node->next = NULL;
+    return node;
+}
+
+Linkedlist* create_list()
+{
+    Linkedlist* list = (Linkedlist*)malloc(sizeof(Linkedlist));
+    list->first = NULL;
+    list->last = NULL;
+    return list;
+}
+
+void add_first_node(Linkedlist* list, Node* node)
+{
+    list->first = node;
+    list->last = node;
+}
+
+void insert_to_node(Linkedlist* list, Node* node)
+{
+    if (list->first == NULL)
+    {
+        add_first_node(list, node);
+    }
+    else
+    {
+        list->last->next = node;
+        list->last = node;
+    }
+}
+
+void print_list(Linkedlist* list)
+{
+    Node* node = list->first;
+    printf("STT  Ten Hang        Don Gia    So Luong    Thanh Tien\n");
+    int STT = 1;
+    while (node != NULL)
+    {
+        printf("%-4d    %-15s    %-10d    %-10d    %-10d\n", STT++, node->Ten_hang, node->Don_gia, node->So_luong, node->Thanh_tien);
+        node = node->next;
+    }
+}
+
+void print_menu()
+{
+    printf("1. Them mot mat hang\n");
+    printf("2. In danh sach cac mat hang\n");
+    printf("3. Thoat\n");
+}
+
+int main()
+{
+    Linkedlist* list = create_list();
+    int choice;
+    while (1)
+    {
+        print_menu();
+        printf("Nhap lua chon: ");
+        scanf("%d", &choice);
+        getchar();
+        if (choice == 1)
+        {
+            Node* node = create_new_node();
+            insert_to_node(list, node);
+        }
+        else if (choice == 2)
+        {
+            print_list(list);
+        }
+        else if (choice == 3)
+        {
+            printf("Ket thuc chuong trinh.\n");
+            break;
+        }
+        else
+        {
+            printf("Khong hop le");
+        }
+    }
+    return 0;
+}
