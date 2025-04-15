@@ -109,3 +109,230 @@ int main()
     }
     return 0;
 }
+
+BT2:
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct Node
+{
+    char Ho_ten[50];
+    int Tuoi;
+    double DTB;
+    struct Node* next;
+} Node;
+
+typedef struct
+{
+    Node* first;
+    Node* last;
+} Linkedlist;
+
+Node* prev_node; // Lưu con trỏ đến nút trước đó trong danh sách
+
+Node* create_new_node()
+{
+    Node* node = (Node*)malloc(sizeof(Node));
+    if (node == NULL)
+    {
+        printf("Khong the cap phat bo nho.\n");
+        return NULL;
+    }
+
+    printf("Nhap ho ten: ");
+    gets(node->Ho_ten);
+    printf("Nhap tuoi: ");
+    scanf("%d", &node->Tuoi);
+    printf("Nhap diem trung binh: ");
+    scanf("%lf", &node->DTB);
+    getchar(); 
+
+    node->next = NULL;
+    return node;
+}
+
+Linkedlist* create_list()
+{
+    Linkedlist* list = (Linkedlist*)malloc(sizeof(Linkedlist));
+    if (list == NULL)
+    {
+        printf("Khong the cap phat bo nho.\n");
+        return NULL;
+    }
+    list->first = NULL;
+    list->last = NULL;
+    return list;
+}
+
+void insert_to_list(Linkedlist* list, Node* node)
+{
+    if (list->first == NULL)
+    {
+        list->first = node;
+        list->last = node;
+    }
+    else
+    {
+        list->last->next = node;
+        list->last = node;
+    }
+}
+
+void print_list(Linkedlist* list)
+{
+    if (list->first == NULL)
+    {
+        printf("Danh sach trong.\n");
+        return;
+    }
+
+    Node* temp = list->first;
+    int stt = 1;
+
+    printf("\nDANH SACH SINH VIEN\n");
+    printf("STT    Ho ten                  Tuoi    Diem TB\n");
+
+    while (temp != NULL)
+    {
+        printf("%-6d %-22s %-8d %-8.2f\n", stt++, temp->Ho_ten, temp->Tuoi, temp->DTB);
+        temp = temp->next;
+    }
+}
+
+Node* search_node(Linkedlist* list, char* key)
+{
+    prev_node = NULL;
+    Node* node = list->first;
+
+    while (node != NULL)
+    {
+        if (strcmp(node->Ho_ten, key) == 0)
+        {
+            return node;
+        }
+        prev_node = node;
+        node = node->next;
+    }
+    return NULL;
+}
+
+void insert_before(Linkedlist* list, char* key, Node* new_node)
+{
+    Node* found_node = search_node(list, key);
+
+    if (found_node == NULL)
+    {
+        printf("Khong tim thay sinh vien co ten %s.\n", key);
+        free(new_node);
+        return;
+    }
+
+    if (prev_node == NULL)
+    {
+        new_node->next = list->first;
+        list->first = new_node;
+    }
+    else
+    {
+        prev_node->next = new_node;
+        new_node->next = found_node;
+    }
+}
+
+void delete_node(Linkedlist* list, char* key)
+{
+    Node* found_node = search_node(list, key);
+
+    if (found_node == NULL)
+    {
+        printf("Khong tim thay sinh vien co ten %s.\n", key);
+        return;
+    }
+
+    if (prev_node == NULL)
+    {
+        list->first = found_node->next;
+        if (list->last == found_node)
+        {
+            list->last = NULL;
+        }
+    }
+    else if (found_node == list->last)
+    {
+        prev_node->next = NULL;
+        list->last = prev_node;
+    }
+    else
+    {
+        prev_node->next = found_node->next;
+    }
+
+    free(found_node);
+}
+
+void print_menu()
+{
+    printf("\nMenu:\n");
+    printf("1. Them sinh vien\n");
+    printf("2. Chen sinh vien truoc mot sinh vien khac\n");
+    printf("3. Xoa sinh vien\n");
+    printf("4. In danh sach sinh vien\n");
+    printf("5. Thoat\n");
+}
+
+int main()
+{
+    Linkedlist* list = create_list();
+    int choice;
+
+    do
+    {
+        print_menu();
+        printf("Nhap lua chon: ");
+        scanf("%d", &choice);
+        getchar();
+
+        switch (choice)
+        {
+            case 1:
+            {
+                Node* newStudent = create_new_node();
+                if (newStudent != NULL)
+                {
+                    insert_to_list(list, newStudent);
+                }
+                break;
+            }
+            case 2:
+            {
+                char targetName[50];
+                printf("Nhap ten sinh vien chen truoc: ");
+                gets(targetName);
+
+                Node* newStudent = create_new_node();
+                insert_before(list, targetName, newStudent);
+                break;
+            }
+            case 3:
+            {
+                char targetName[50];
+                printf("Nhap ten sinh vien can xoa: ");
+                gets(targetName);
+
+                delete_node(list, targetName);
+                break;
+            }
+            case 4:
+                print_list(list);
+                break;
+            case 5:
+                printf("Ket thuc chuong trinh.\n");
+                break;
+            default:
+                printf("Lua chon khong hop le. Vui long chon lai.\n");
+        }
+    } while (choice != 5);
+
+    return 0;
+}
