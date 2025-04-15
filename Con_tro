@@ -1,0 +1,33 @@
+BT1:
+#include <stdio.h>
+#include <stdlib.h>
+
+void doicho(int *a, int *b)
+{
+    int temp = *a;
+    *a=*b;
+    *b=temp;
+}
+int main()
+{
+    int a=5, b=10;
+    int *pa = &a, *pb = &b;
+    printf("Before: a = %d, b = %d\n", *pa, *pb);
+    doicho(pa, pb);
+    printf("After: a = %d, b = %d\n", *pa, *pb);
+    return 0;
+}
+
+BT2:
+#include <stdio.h>
+int main()
+{
+    int a[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    int *k = a;
+
+    for (int i = 0; i < 10; i++)
+    {
+        printf("%d ", *(k+i));
+    }
+    return 0;
+}
