@@ -31,3 +31,91 @@ int main()
     }
     return 0;
 }
+
+BT3:
+#include <stdio.h>
+
+int main() {
+    int arr[10];
+    int n;
+
+    printf("Nhap so luong phan tu cua mang: ");
+    scanf("%d", &n);
+    printf("So luong phan tu vua nhap: %d\n", n);
+    int *p = arr;
+    for (int i = 0; i < n; i++) {
+        printf("Nhap arr[%d]: ", i);
+        scanf("%d", p + i);
+    }
+    int min = *p;
+    int max = *p;
+    for (int i = 0; i < n; i++) {
+        if (*(p + i) < min) {
+            min = *(p + i);
+        }
+        if (*(p + i) > max) {
+            max = *(p + i);
+        }
+    }
+    printf("Gia tri nho nhat cua mang: %d\n", min);
+    printf("Gia tri lon nhat cua mang: %d\n", max);
+    return 0;
+}
+
+BT4:
+#include <stdio.h>
+
+void nhapmang(int *a, int *n)
+{
+    printf("Nhap so luong phan tu cua mang: ");
+    scanf("%d", n);
+
+    for (int i = 0; i < *n; i++)
+    {
+        printf("a[%d] = ", i);
+        scanf("%d", &a[i]);
+    }
+}
+
+void doi_cho(int *a, int *b)
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+void sap_xep_mang(int *a, int n)
+{
+    for (int i = 0; i < n - 1; i++)
+    {
+        for (int j = i + 1; j < n; j++)
+        {
+            if (*(a + i) > *(a + j))
+            {
+                doi_cho(a + i, a + j);
+            }
+        }
+    }
+}
+
+void in_mang(int *a, int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        printf("%d ", *(a + i));
+    }
+    printf("\n");
+}
+
+int main()
+{
+    int arr[100];
+    int n;
+    nhapmang(arr, &n);
+    printf("Mang truoc khi sap xep: ");
+    in_mang(arr, n);
+    sap_xep_mang(arr, n);
+    printf("Mang sau khi sap xep tang dan: ");
+    in_mang(arr, n);
+    return 0;
+}
